@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import '../../style/atoms/button/Button.scss'
 
-export const Button = memo(({ children, className, onClickShowModalFlag }) => {
+export const Button = memo(({ children, className, onClickFunc }) => {
     return (
-        <button className={className} onClick={onClickShowModalFlag}>{children}</button>
+        <button className={className} onClick={onClickFunc}>{children}</button>
     );
 })

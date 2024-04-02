@@ -28,7 +28,7 @@ export const Home = memo(() => {
             <div className="right">
                 <h1>すべての話題が、ここに。</h1>
                 <h4>今すぐ参加しましょう。</h4>
-                <Button className={buttonClass.newUser} onClickShowModalFlag={onClickShowModalFlag}>アカウントを作成</Button>
+                <Button className={buttonClass.newUser} onClickFunc={onClickShowModalFlag}>アカウントを作成</Button>
                 または
                 <Button className={buttonClass.login}>ログイン</Button>
             </div>
