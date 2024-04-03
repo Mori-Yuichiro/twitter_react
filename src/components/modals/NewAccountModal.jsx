@@ -8,14 +8,8 @@ import { useNewAccountHook } from "../../hooks/newAccountModal/useNewAccountHook
 
 export const NewAccountModal = memo(({ showModalFlag, onClickShowModalFlag }) => {
     const {
-        name,
-        setName,
-        email,
-        setEmail,
-        password,
-        setPassword,
-        passwordConfirmation,
-        setPasswordConfirmation,
+        account,
+        onChangeAccount,
         errorMsgs,
         onClickSignup
     } = useNewAccountHook();
@@ -23,7 +17,7 @@ export const NewAccountModal = memo(({ showModalFlag, onClickShowModalFlag }) =>
     return (
         <>
             {
-                showModalFlag ? (
+                showModalFlag && (
                     <div className="overlay">
                         <div className="modal">
                             <div className="header">
@@ -31,21 +25,20 @@ export const NewAccountModal = memo(({ showModalFlag, onClickShowModalFlag }) =>
                                 <h1> アカウントを作成</h1>
                             </div>
                             {errorMsgs && errorMsgs.map((errorMsg, index
-                            ) => {
-                                return (
-                                    <p key={index}>{errorMsg}</p>
-                                )
-                            })}
+                            ) => (
+                                <p key={index}>{errorMsg}</p>
+                            )
+                            )}
                             <form className="new-user-form" action="">
-                                <InputField type='text' value={name} setValue={setName} placeholder='名前' />
-                                <InputField type='text' value={email} setValue={setEmail} placeholder='Eメール' />
-                                <InputField type='password' value={password} setValue={setPassword} placeholder='パスワード' />
-                                <InputField type='password' value={passwordConfirmation} setValue={setPasswordConfirmation} placeholder='パスワード(確認)' />
-                                <Button onClickFunc={onClickSignup}>アカウント作成</Button>
+                                <InputField type='text' name='name' value={account.name} setValue={onChangeAccount} placeholder='名前' />
+                                <InputField type='text' name='email' value={account.email} setValue={onChangeAccount} placeholder='Eメール' />
+                                <InputField type='password' name='password' value={account.password} setValue={onChangeAccount} placeholder='パスワード' />
+                                <InputField type='password' name='passwordConfirmation' value={account.passwordConfirmation} setValue={onChangeAccount} placeholder='パスワード(確認)' />
+                                <Button onClick={onClickSignup}>アカウント作成</Button>
                             </form>
                         </div>
                     </div>
-                ) : <></>}
+                )}
         </>
     );
 })

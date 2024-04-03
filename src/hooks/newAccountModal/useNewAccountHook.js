@@ -1,28 +1,21 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 import { AuthHook } from "../auth/authHook";
 
 export const useNewAccountHook = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [passwordConfirmation, setPasswordConfirmation] = useState('');
+    const [account, setAccount] = useState({});
     const { signUp } = AuthHook();
     const [errorMsgs, setErrorMsgs] = useState([]);
 
-    const generateParam = useCallback(() => {
-        return {
-            name,
-            email,
-            password,
-            passwordConfirmation
-        };
-    }, [name, email, password, passwordConfirmation])
+    const onChangeAccount = (e) => {
+        const { name, value } = e.target
+        setAccount({ ...account, [name]: value });
+    }
 
     const onClickSignup = async (e) => {
         try {
             e.preventDefault();
-            const params = generateParam();
-            await signUp(params);
+            console.log(account)
+            await signUp(account);
         } catch (error) {
             console.log(error.response.data.errors.full_messages);
             setErrorMsgs(error.response.data.errors.full_messages);
@@ -30,14 +23,8 @@ export const useNewAccountHook = () => {
     }
 
     return {
-        name,
-        setName,
-        email,
-        setEmail,
-        password,
-        setPassword,
-        passwordConfirmation,
-        setPasswordConfirmation,
+        account,
+        onChangeAccount,
         errorMsgs,
         onClickSignup
     };
