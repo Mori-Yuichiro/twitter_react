@@ -2,7 +2,12 @@ import { useState } from "react";
 import { AuthHook } from "../auth/authHook";
 
 export const useNewAccountHook = () => {
-    const [account, setAccount] = useState({});
+    const [account, setAccount] = useState({
+        name: '',
+        email: '',
+        password: '',
+        passwordConfirmation: ''
+    });
     const { signUp } = AuthHook();
     const [errorMsgs, setErrorMsgs] = useState([]);
 
@@ -14,7 +19,7 @@ export const useNewAccountHook = () => {
     const onClickSignup = async (e) => {
         try {
             e.preventDefault();
-            console.log(account)
+            console.log(account);
             await signUp(account);
         } catch (error) {
             console.log(error.response.data.errors.full_messages);

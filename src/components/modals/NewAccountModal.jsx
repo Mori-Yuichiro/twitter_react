@@ -30,10 +30,10 @@ export const NewAccountModal = memo(({ showModalFlag, onClickShowModalFlag }) =>
                             )
                             )}
                             <form className="new-user-form" action="">
-                                <InputField type='text' name='name' value={account.name} setValue={onChangeAccount} placeholder='名前' />
-                                <InputField type='text' name='email' value={account.email} setValue={onChangeAccount} placeholder='Eメール' />
-                                <InputField type='password' name='password' value={account.password} setValue={onChangeAccount} placeholder='パスワード' />
-                                <InputField type='password' name='passwordConfirmation' value={account.passwordConfirmation} setValue={onChangeAccount} placeholder='パスワード(確認)' />
+                                <InputField type='text' name='name' value={account.name} onChange={onChangeAccount} placeholder='名前' />
+                                <InputField type='text' name='email' value={account.email} onChange={onChangeAccount} placeholder='Eメール' />
+                                <InputField type='password' name='password' value={account.password} onChange={onChangeAccount} placeholder='パスワード' />
+                                <InputField type='password' name='passwordConfirmation' value={account.passwordConfirmation} onChange={onChangeAccount} placeholder='パスワード(確認)' />
                                 <Button onClick={onClickSignup}>アカウント作成</Button>
                             </form>
                         </div>

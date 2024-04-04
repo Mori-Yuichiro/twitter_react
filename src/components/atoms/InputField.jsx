@@ -2,8 +2,8 @@ import { memo } from "react";
 
 import '../../style/atoms/input/InputField.scss'
 
-export const InputField = memo(({ setValue, ...props }) => {
+export const InputField = memo(({ ...props }) => {
     return (
-        <input {...props} onChange={e => setValue(e)} />
+        <input {...props} />
     );
 })
