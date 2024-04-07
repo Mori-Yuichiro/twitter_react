@@ -22,7 +22,6 @@ export const useNewAccountHook = () => {
             console.log(account);
             await signUp(account);
         } catch (error) {
-            console.log(error.response.data.errors.full_messages);
             setErrorMsgs(error.response.data.errors.full_messages);
         }
     }

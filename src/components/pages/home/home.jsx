@@ -3,8 +3,9 @@ import { IconContext } from "react-icons";
 import { FaTwitter } from "react-icons/fa";
 
 import { Button } from "../../atoms/Button"
-import '../../../style/pages/toppage/Home.scss'
 import { NewAccountModal } from "../../modals/NewAccountModal";
+import { LoginModal } from "../../modals/LoginModal";
+import '../../../style/pages/toppage/Home.scss'
 
 export const Home = memo(() => {
     const buttonClass = {
@@ -13,10 +14,15 @@ export const Home = memo(() => {
     };
 
     const [showModalFlag, setShowModalFlag] = useState(false);
+    const [showLoginModal, setShowLoginModal] = useState(false);
 
     const onClickShowModalFlag = useCallback(() => {
         setShowModalFlag(!showModalFlag);
     }, [setShowModalFlag, showModalFlag]);
+
+    const onClickShowLoginModal = useCallback(() => {
+        setShowLoginModal(!showLoginModal);
+    }, [setShowLoginModal, showLoginModal]);
 
     return (
         <div className="home">
@@ -30,9 +36,10 @@ export const Home = memo(() => {
                 <h4>今すぐ参加しましょう。</h4>
                 <Button className={buttonClass.newUser} onClick={onClickShowModalFlag}>アカウントを作成</Button>
                 または
-                <Button className={buttonClass.login}>ログイン</Button>
+                <Button className={buttonClass.login} onClick={onClickShowLoginModal}>ログイン</Button>
             </div>
             <NewAccountModal showModalFlag={showModalFlag} onClickShowModalFlag={onClickShowModalFlag} />
+            <LoginModal showLoginModal={showLoginModal} onClickShowLoginModal={onClickShowLoginModal} />
         </div>
     )
 })
