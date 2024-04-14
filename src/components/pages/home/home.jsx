@@ -5,7 +5,7 @@ import { FaTwitter } from "react-icons/fa";
 import { Button } from "../../atoms/Button"
 import { NewAccountModal } from "../../modals/NewAccountModal";
 import { LoginModal } from "../../modals/LoginModal";
-import '../../../style/pages/toppage/Home.scss'
+import '../../../style/pages/home/Home.scss'
 
 export const Home = memo(() => {
     const buttonClass = {

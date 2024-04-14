@@ -1,3 +1,6 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Modal from 'react-bootstrap/Modal';
+
 import { memo } from "react";
 import { IoArrowBack } from "react-icons/io5";
 
@@ -13,21 +16,32 @@ export const LoginModal = memo(({ showLoginModal, onClickShowLoginModal }) => {
     if (!showLoginModal) return <></>
     return (
         <div className="overlay">
-            <div className="modal">
-                <div className="header">
-                    <IoArrowBack onClick={onClickShowLoginModal} />
-                    <h1>ログイン</h1>
-                </div>
-                {errorMsgs && errorMsgs.map((errorMsg, index
-                ) => (
-                    <p key={index}>{errorMsg}</p>
-                )
-                )}
-                <form className="login-form" action="">
-                    <InputField type='text' name='email' value={loginAccount.email} onChange={onChangeLoginAccount} placeholder='Eメール' />
-                    <InputField type='password' name='password' value={loginAccount.password} onChange={onChangeLoginAccount} placeholder='パスワード' />
-                    <Button onClick={onClickLogin}>ログイン</Button>
-                </form>
+            <div
+                className="modal show"
+                style={{ display: 'block', position: 'initial' }}
+            >
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <IoArrowBack onClick={onClickShowLoginModal} />
+                        <Modal.Title>ログイン</Modal.Title>
+                    </Modal.Header>
+                    {errorMsgs && errorMsgs.map((errorMsg, index
+                    ) => (
+                        <p key={index}>{errorMsg}</p>
+                    )
+                    )}
+
+                    <form className="login-form" action="">
+                        <Modal.Body>
+                            <InputField type='text' name='email' value={loginAccount.email} onChange={onChangeLoginAccount} placeholder='Eメール' />
+                            <InputField type='password' name='password' value={loginAccount.password} onChange={onChangeLoginAccount} placeholder='パスワード' />
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button onClick={onClickLogin}>ログイン</Button>
+                        </Modal.Footer>
+                    </form>
+                </Modal.Dialog>
             </div>
         </div>
     );

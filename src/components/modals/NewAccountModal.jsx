@@ -1,3 +1,5 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Modal from 'react-bootstrap/Modal';
 import { memo } from "react";
 import { InputField } from "../atoms/InputField";
 import { IoArrowBack } from "react-icons/io5";
@@ -14,31 +16,58 @@ export const NewAccountModal = memo(({ showModalFlag, onClickShowModalFlag }) =>
         onClickSignup
     } = useNewAccountHook();
 
+    if (!showModalFlag) return <></>
     return (
-        <>
-            {
-                showModalFlag && (
-                    <div className="overlay">
-                        <div className="modal">
-                            <div className="header">
-                                <IoArrowBack onClick={onClickShowModalFlag} />
-                                <h1> アカウントを作成</h1>
-                            </div>
-                            {errorMsgs && errorMsgs.map((errorMsg, index
-                            ) => (
-                                <p key={index}>{errorMsg}</p>
-                            )
-                            )}
-                            <form className="new-user-form" action="">
-                                <InputField type='text' name='name' value={account.name} onChange={onChangeAccount} placeholder='名前' />
-                                <InputField type='text' name='email' value={account.email} onChange={onChangeAccount} placeholder='Eメール' />
-                                <InputField type='password' name='password' value={account.password} onChange={onChangeAccount} placeholder='パスワード' />
-                                <InputField type='password' name='passwordConfirmation' value={account.passwordConfirmation} onChange={onChangeAccount} placeholder='パスワード(確認)' />
-                                <Button onClick={onClickSignup}>アカウント作成</Button>
-                            </form>
-                        </div>
-                    </div>
-                )}
-        </>
+        // <div className="overlay">
+        //     <div className="modal">
+        //         <div className="header">
+        //             <IoArrowBack onClick={onClickShowModalFlag} />
+        //             <h1> アカウントを作成</h1>
+        //         </div>
+        //         {errorMsgs && errorMsgs.map((errorMsg, index
+        //         ) => (
+        //             <p key={index}>{errorMsg}</p>
+        //         )
+        //         )}
+        //         <form className="new-user-form" action="">
+        //             <InputField type='text' name='name' value={account.name} onChange={onChangeAccount} placeholder='名前' />
+        //             <InputField type='text' name='email' value={account.email} onChange={onChangeAccount} placeholder='Eメール' />
+        //             <InputField type='password' name='password' value={account.password} onChange={onChangeAccount} placeholder='パスワード' />
+        //             <InputField type='password' name='passwordConfirmation' value={account.passwordConfirmation} onChange={onChangeAccount} placeholder='パスワード(確認)' />
+        //             <Button onClick={onClickSignup}>アカウント作成</Button>
+        //         </form>
+        //     </div>
+        // </div>
+        <div className="overlay">
+            <div
+                className="modal show"
+                style={{ display: 'block', position: 'initial' }}
+            >
+                <Modal.Dialog>
+                    <Modal.Header>
+                        <IoArrowBack onClick={onClickShowModalFlag} />
+                        <Modal.Title>アカウントを作成</Modal.Title>
+                    </Modal.Header>
+                    {errorMsgs && errorMsgs.map((errorMsg, index
+                    ) => (
+                        <p key={index}>{errorMsg}</p>
+                    )
+                    )}
+
+                    <form className="login-form" action="">
+                        <Modal.Body>
+                            <InputField type='text' name='name' value={account.name} onChange={onChangeAccount} placeholder='名前' />
+                            <InputField type='text' name='email' value={account.email} onChange={onChangeAccount} placeholder='Eメール' />
+                            <InputField type='password' name='password' value={account.password} onChange={onChangeAccount} placeholder='パスワード' />
+                            <InputField type='password' name='passwordConfirmation' value={account.passwordConfirmation} onChange={onChangeAccount} placeholder='パスワード(確認)' />
+                        </Modal.Body>
+
+                        <Modal.Footer>
+                            <Button onClick={onClickSignup}>アカウント作成</Button>
+                        </Modal.Footer>
+                    </form>
+                </Modal.Dialog>
+            </div>
+        </div>
     );
 })
