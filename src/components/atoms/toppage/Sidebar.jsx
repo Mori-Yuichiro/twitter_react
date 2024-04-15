@@ -14,77 +14,39 @@ import '../../../style/atoms/toppage/Sidebar.scss'
 import { Button } from "../Button";
 
 export const Sidebar = ({ currentUserData }) => {
+    const ITEM_LIST = [
+        { label: "Home", icon: <AiFillHome /> },
+        { label: "Explore", icon: <AiOutlineSearch /> },
+        { label: "Notification", icon: <IoMdNotificationsOutline /> },
+        { label: "Message", icon: <AiOutlineMail /> },
+        { label: "Lists", icon: <CiViewList /> },
+        { label: "Bookmarks", icon: <BsBookmark /> },
+        { label: "Communities", icon: <BsPeople /> },
+        { label: "Premium", icon: <FaTwitter /> },
+        { label: "Profile", icon: <BsPerson /> },
+        { label: "More", icon: <CiCircleMore /> },
+        { label: "Home", icon: <AiFillHome /> },
+    ];
+
     return (
-        <>
-            <aside>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <AiFillHome />
-                        <p>Home</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <AiOutlineSearch />
-                        <p>Explore</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <IoMdNotificationsOutline />
-                        <p>Notification</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <AiOutlineMail />
-                        <p>Message</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <CiViewList />
-                        <p>Lists</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <BsBookmark />
-                        <p>Bookmarks</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <BsPeople />
-                        <p>Communities</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <FaTwitter />
-                        <p>Premium</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <BsPerson />
-                        <p>Profile</p>
-                    </IconContext.Provider>
-                </div>
-                <div className="sidebar-menu">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <CiCircleMore />
-                        <p>More</p>
-                    </IconContext.Provider>
-                </div>
-                <Button>Post</Button>
-                <div className="name-area">
-                    <IconContext.Provider value={{ size: '1.4rem' }}>
-                        <BsPerson />
-                        <p>{currentUserData.data.name}</p>
-                    </IconContext.Provider>
-                </div>
-            </aside>
-        </>
+        <aside>
+            {ITEM_LIST.map((item, i) => {
+                return (
+                    <div key={i} className="sidebar-menu">
+                        <IconContext.Provider value={{ size: '1.4rem' }}>
+                            {item.icon}
+                            <p>{item.label}</p>
+                        </IconContext.Provider>
+                    </div>
+                );
+            })}
+            <Button>Post</Button>
+            <div className="name-area">
+                <IconContext.Provider value={{ size: '1.4rem' }}>
+                    <BsPerson />
+                    <p>{currentUserData.data.name}</p>
+                </IconContext.Provider>
+            </div>
+        </aside>
     )
 }

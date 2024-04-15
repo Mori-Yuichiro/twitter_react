@@ -1,15 +1,13 @@
-import { useContext, useState } from "react";
-import axios from "axios";
-import { CookieContext } from "../../providers/TwitterProvider";
+import { useState } from "react";
+import { axiosInstance } from "../../axios/axiosInstance";
 
 export const FormAreaHook = () => {
-    const BASEURL = 'http://localhost:3000';
     const [images, setImages] = useState([]);
     const [content, setContent] = useState('');
-    const { cookies } = useContext(CookieContext);
     const [imageDatas, setImageDatas] = useState([]);
     const [imageNames, setImageNames] = useState([]);
     const [errorMsgs, setErrorMsgs] = useState([]);
+    const { instance } = axiosInstance();
 
     const fileRead = async (file) => {
         const fileReader = new FileReader();
@@ -39,31 +37,29 @@ export const FormAreaHook = () => {
     };
 
     const sendContent = async () => {
-        return await axios.post(`${BASEURL}/api/v1/tweets`, {
-            content
-        }, {
-            headers: {
-                'access-token': cookies['access-token'],
-                'client': cookies['client'],
-                'uid': cookies['uid']
-            }
-        }
-        );
+        return await instance.post('/api/v1/tweets', { content });
     }
 
     const sendImages = async (res) => {
-        console.log(res);
-        return await axios.post(`${BASEURL}/api/v1/images`, {
-            tweet_id: res.data.tweet.id,
-            tweet_image_datas: imageDatas,
-            tweet_image_names: imageNames
-        }, {
-            headers: {
-                'access-token': cookies['access-token'],
-                'client': cookies['client'],
-                'uid': cookies['uid']
+        // return await axios.post(`${BASEURL}/api/v1/images`, {
+        //     tweet_id: res.data.tweet.id,
+        //     tweet_image_datas: imageDatas,
+        //     tweet_image_names: imageNames
+        // }, {
+        //     headers: {
+        //         'access-token': cookies['access-token'],
+        //         'client': cookies['client'],
+        //         'uid': cookies['uid']
+        //     }
+        // });
+        return await instance.post(
+            '/api/v1/images',
+            {
+                tweet_id: res.data.tweet.id,
+                tweet_image_datas: imageDatas,
+                tweet_image_names: imageNames
             }
-        });
+        )
     }
 
     const sendTweet = async (e) => {

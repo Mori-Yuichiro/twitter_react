@@ -6,15 +6,13 @@ import "../../../style/atoms/toppage/Header.scss";
 
 export const Header = () => {
     return (
-        <>
-            <header>
-                <Link to="/toppage">
-                    <IconContext.Provider value={{ size: '30px', color: 'rgb(29, 155, 240)' }}>
-                        <FaTwitter />
-                        <h4>Twitter Clone</h4>
-                    </IconContext.Provider>
-                </Link>
-            </header>
-        </>
+        <header>
+            <Link to="/toppage">
+                <IconContext.Provider value={{ size: '30px', color: 'rgb(29, 155, 240)' }}>
+                    <FaTwitter />
+                    <h4>Twitter Clone</h4>
+                </IconContext.Provider>
+            </Link>
+        </header>
     )
 }
