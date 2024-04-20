@@ -1,13 +1,12 @@
 import { useState } from "react";
-import { axiosInstance } from "../../axios/axiosInstance";
+import { AxiosInstance } from "../../axios/axiosInstance";
 
 export const FormAreaHook = () => {
     const [images, setImages] = useState([]);
     const [content, setContent] = useState('');
     const [imageDatas, setImageDatas] = useState([]);
     const [imageNames, setImageNames] = useState([]);
-    const [errorMsgs, setErrorMsgs] = useState([]);
-    const { instance } = axiosInstance();
+    const { instance } = AxiosInstance();
 
     const fileRead = async (file) => {
         const fileReader = new FileReader();
@@ -41,17 +40,6 @@ export const FormAreaHook = () => {
     }
 
     const sendImages = async (res) => {
-        // return await axios.post(`${BASEURL}/api/v1/images`, {
-        //     tweet_id: res.data.tweet.id,
-        //     tweet_image_datas: imageDatas,
-        //     tweet_image_names: imageNames
-        // }, {
-        //     headers: {
-        //         'access-token': cookies['access-token'],
-        //         'client': cookies['client'],
-        //         'uid': cookies['uid']
-        //     }
-        // });
         return await instance.post(
             '/api/v1/images',
             {
@@ -74,11 +62,11 @@ export const FormAreaHook = () => {
             setContent('');
             setImageDatas([]);
             setImageNames([]);
-            setErrorMsgs([]);
+            window.location.reload();
         } catch (error) {
-            setErrorMsgs(error.response.data.tweet.content);
+            console.log(error.response.data.tweet.content);
         }
     }
 
-    return { errorMsgs, content, setContent, images, fileInput, sendTweet };
+    return { content, setContent, images, fileInput, sendTweet };
 }
