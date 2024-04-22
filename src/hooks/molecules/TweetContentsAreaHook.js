@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { AxiosInstance } from "../../axios/axiosInstance"
 
@@ -28,5 +28,9 @@ export const TweetContentsAreaHook = () => {
         await getAllTweets();
     }, [getAllTweets])
 
-    return { allTweets, LIMIT, offset, setOffset, totalPage, doGetTweets }
+    useEffect(() => {
+        doGetTweets();
+    }, [offset])
+
+    return { allTweets, LIMIT, offset, setOffset, totalPage }
 }

@@ -1,15 +1,9 @@
-import { useEffect } from "react"
-
 import "../../style/molecules/TweetContentsArea.scss"
 import { Link } from "react-router-dom";
 import { TweetContentsAreaHook } from "../../hooks/molecules/TweetContentsAreaHook";
 
 export const TweetContentsArea = () => {
-    const { allTweets, LIMIT, offset, setOffset, totalPage, doGetTweets } = TweetContentsAreaHook();
-
-    useEffect(() => {
-        doGetTweets();
-    }, [offset])
+    const { allTweets, LIMIT, offset, setOffset, totalPage } = TweetContentsAreaHook();
 
     return (
         <div className="tweet-content">

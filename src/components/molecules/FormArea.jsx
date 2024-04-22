@@ -32,11 +32,9 @@ export const FormArea = () => {
                         <IconContext.Provider value={{ size: '1.4rem' }}>
                             <BiPhotoAlbum />
                         </IconContext.Provider>
-                        <InputField type="file" multiple onChange={e => {
-                            fileInput(e);
-                        }} />
+                        <InputField type="file" multiple onChange={fileInput} />
                     </label>
-                    {(content.length > 0 && content.length < 141) ? <Button onClick={(e) => sendTweet(e)}>Post</Button> : <Button disabled onClick={(e) => sendTweet(e)}>Post</Button>}
+                    {(content.length > 0 && content.length < 141) ? <Button onClick={sendTweet}>Post</Button> : <Button disabled onClick={sendTweet}>Post</Button>}
                 </div>
             </form>
         </div>
