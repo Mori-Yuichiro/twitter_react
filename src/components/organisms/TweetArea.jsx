@@ -3,6 +3,7 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import { FormArea } from "../molecules/FormArea";
+import { TweetContentsArea } from "../molecules/TweetContentsArea"
 
 
 export const TweetArea = () => {
@@ -17,6 +18,7 @@ export const TweetArea = () => {
                 <Tab eventKey="profile" title="Following" />
             </Tabs>
             <FormArea />
+            <TweetContentsArea />
         </>
     );
 }

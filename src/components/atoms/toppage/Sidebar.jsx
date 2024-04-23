@@ -25,7 +25,6 @@ export const Sidebar = ({ currentUserData }) => {
         { label: "Premium", icon: <FaTwitter /> },
         { label: "Profile", icon: <BsPerson /> },
         { label: "More", icon: <CiCircleMore /> },
-        { label: "Home", icon: <AiFillHome /> },
     ];
 
     return (

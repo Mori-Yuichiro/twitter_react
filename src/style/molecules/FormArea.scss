@@ -42,5 +42,9 @@
             color: #fff;
             margin-top: 10px;
         }
+
+        button:disabled {
+            opacity: 0.5;
+        }
     }
 }
