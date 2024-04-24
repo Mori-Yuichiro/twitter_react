@@ -1,37 +1,14 @@
-import { memo, useCallback, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { memo } from "react";
 import { FaArrowLeft } from "react-icons/fa";
-import { AxiosInstance } from "../../axios/axiosInstance";
 import { Tweet } from "../atoms/Tweet";
 import { Button } from "../atoms/Button"
 import { InputField } from "../atoms/InputField"
+import { TweetDetailAreaHook } from "../../hooks/organisms/TweetDetailAreaHook";
 import "../../style/organisms/TweetDetailArea.scss";
 
 
 export const TweetDetailArea = memo(() => {
-    const navigate = useNavigate();
-    const [tweet, setTweet] = useState({
-        user: {
-            name: ''
-        },
-        image_urls: null,
-        content: ''
-    });
-    const { instance } = AxiosInstance();
-    const location = useLocation();
-
-    const getTweetDetail = useCallback(async () => {
-        const tweetDetail = await instance.get(`/api/v1/${location.pathname}`);
-        setTweet(tweetDetail.data.tweet);
-    }, [instance, location.pathname])
-
-    const doGetTweetDetail = useCallback(async () => {
-        await getTweetDetail();
-    }, [getTweetDetail])
-
-    useEffect(() => {
-        doGetTweetDetail();
-    }, [])
+    const { tweet, navigate } = TweetDetailAreaHook();
 
     return (
         <div className="tweet-detail-area">
