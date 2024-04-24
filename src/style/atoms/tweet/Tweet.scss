@@ -1,0 +1,25 @@
+.tweet {
+    a {
+        text-decoration: none;
+        color: #000;
+
+        .tweet-text {
+            overflow-wrap: break-word;
+        }
+
+        .images {
+            width: 300px;
+
+            img {
+                width: 50%;
+            }
+        }
+    }
+
+
+    .icon-area {
+        margin: 20px 0 10px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+}

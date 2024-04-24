@@ -1,6 +1,7 @@
-import "../../style/molecules/TweetContentsArea.scss"
 import { Link } from "react-router-dom";
+import "../../style/molecules/TweetContentsArea.scss"
 import { TweetContentsAreaHook } from "../../hooks/molecules/TweetContentsAreaHook";
+import { Tweet } from "../atoms/Tweet";
 
 export const TweetContentsArea = () => {
     const { allTweets, LIMIT, offset, setOffset, totalPage } = TweetContentsAreaHook();
@@ -11,15 +12,7 @@ export const TweetContentsArea = () => {
             {allTweets.map((tweet, i) => {
                 return (
                     <div key={i} className="tweet">
-                        <p>{tweet.user.name}</p>
-                        <p>{tweet.content}</p>
-                        <div className="images">
-                            {tweet.image_urls &&
-                                tweet.image_urls.map((url, i) => {
-                                    return <img key={i} src={url} alt="画像" />
-                                })
-                            }
-                        </div>
+                        <Tweet tweet={tweet} />
                     </div>
                 )
             })}
