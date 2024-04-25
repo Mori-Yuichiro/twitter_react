@@ -4,6 +4,7 @@ import { Home } from './components/pages/home/home';
 import { TwitterProvider } from './providers/TwitterProvider';
 import { Toppage } from './components/pages/toppage/Toppage';
 import { Auth } from './components/atoms/auth/Auth';
+import { TweetDetail } from './components/pages/detail/TweetDetail';
 
 function App() {
   return (
@@ -14,6 +15,11 @@ function App() {
           <Route path='/toppage' element={
             <Auth>
               <Toppage />
+            </Auth>
+          } />
+          <Route path='/tweets/:id' element={
+            <Auth>
+              <TweetDetail />
             </Auth>
           } />
         </Routes>
