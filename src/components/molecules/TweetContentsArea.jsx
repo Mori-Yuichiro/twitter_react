@@ -12,7 +12,7 @@ export const TweetContentsArea = () => {
             {allTweets.map((tweet, i) => {
                 return (
                     <div key={i} className="tweet">
-                        <Tweet tweet={tweet} />
+                        <Tweet tweet={tweet} user={tweet.user} />
                     </div>
                 )
             })}

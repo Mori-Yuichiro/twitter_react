@@ -1,7 +1,7 @@
-import { memo, useCallback, useContext, useEffect } from "react";
+import { memo, useCallback, useContext, useEffect, useState } from "react";
 
 import { AuthHook } from "../../../hooks/auth/authHook";
-import { CookieContext, currentUserContext } from "../../../providers/TwitterProvider";
+import { CookieContext } from "../../../providers/TwitterProvider";
 import { Header } from "../../atoms/toppage/Header";
 import { Sidebar } from "../../atoms/toppage/Sidebar";
 import { TweetArea } from "../../organisms/TweetArea";
@@ -10,7 +10,16 @@ import { RightSidebar } from "../../atoms/toppage/RightSidebar";
 
 export const Toppage = memo(() => {
     const { cookies } = useContext(CookieContext);
-    const { currentUserData, setCurrentUserData } = useContext(currentUserContext);
+    const dataInCurrentUser = {
+        uid: '',
+        client: '',
+        name: '',
+        'access-token': ''
+    };
+    const [currentUserData, setCurrentUserData] = useState({
+        is_login: false,
+        data: dataInCurrentUser
+    });
 
     const { currentUser } = AuthHook();
     const getCurrentUser = useCallback(async () => {
@@ -22,6 +31,7 @@ export const Toppage = memo(() => {
             const currentUser = async () => {
                 const currentUser = await getCurrentUser();
                 setCurrentUserData(currentUser.data);
+                sessionStorage.setItem('currentUserData', JSON.stringify(currentUser.data));
             }
             currentUser();
         }
