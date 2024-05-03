@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AuthHook } from "../../hooks/auth/authHook";
+import { AuthHook } from "../auth/authHook";
 import { CookieContext } from "../../providers/TwitterProvider";
 
 export const useLoginHook = () => {

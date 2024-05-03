@@ -1,28 +1,23 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Form from 'react-bootstrap/Form';
-import { memo, useCallback, useState } from 'react';
+import { memo } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { IoArrowBack } from "react-icons/io5";
 
 import { InputField } from "../atoms/InputField";
 import { Button } from '../atoms/Button';
-import { AxiosInstance } from '../../axios/axiosInstance';
+import { ProfileEditModalHook } from '../../hooks/modal/ProfileEditModalHook';
 import "../../style/modal/ProfileEditModal.scss";
 
 export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEditModal }) => {
-    const [newProfile, setNewProfile] = useState({});
-    const { instance } = AxiosInstance();
+    const {
+        newProfile,
+        setNewProfile,
+        editProfile,
+        selectHeaderImage,
+        selectProfileImage
+    } = ProfileEditModalHook(showProfileEditModal, setShowProfileEditModal);
 
-    const editProfile = useCallback(async () => {
-        const resEditProfile = await instance.put(
-            '/api/v1/profile',
-            {
-                user: newProfile
-            }
-        );
-        console.log(resEditProfile);
-        setShowProfileEditModal(!showProfileEditModal);
-    }, [instance])
 
     if (!showProfileEditModal) return <></>;
     return (
@@ -42,6 +37,7 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
                             <InputField
                                 type='text'
                                 name='name'
+                                value={newProfile.name}
                                 placeholder='Name'
                                 onChange={(e) => setNewProfile({
                                     ...newProfile,
@@ -51,6 +47,7 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
                             <InputField
                                 type='text'
                                 name='bio'
+                                value={newProfile.bio}
                                 placeholder='Bio'
                                 onChange={(e) => setNewProfile({
                                     ...newProfile,
@@ -59,7 +56,9 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
                             />
                             <InputField
                                 type='text'
-                                name='birthday' placeholder='Birthday'
+                                name='birthday'
+                                value={newProfile.birthday}
+                                placeholder='Birthday'
                                 onChange={(e) => setNewProfile({
                                     ...newProfile,
                                     'birthday': e.target.value
@@ -67,7 +66,9 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
                             />
                             <InputField
                                 type='text'
-                                name='location' placeholder='Locaiton'
+                                name='location'
+                                value={newProfile.location}
+                                placeholder='Locaiton'
                                 onChange={(e) => setNewProfile({
                                     ...newProfile,
                                     'location': e.target.value
@@ -75,7 +76,9 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
                             />
                             <InputField
                                 type='text'
-                                name='website' placeholder='Website'
+                                name='website'
+                                value={newProfile.website}
+                                placeholder='Website'
                                 onChange={(e) => setNewProfile({
                                     ...newProfile,
                                     'website': e.target.value
@@ -83,11 +86,13 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
                             />
                             <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Label>Header Image</Form.Label>
-                                <Form.Control type="file" />
+                                <Form.Control type="file" onChange={selectHeaderImage} />
                             </Form.Group>
                             <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Label>Profile Image</Form.Label>
-                                <Form.Control type="file" />
+                                <Form.Control type="file"
+                                    onChange={selectProfileImage}
+                                />
                             </Form.Group>
                         </Modal.Body>
 

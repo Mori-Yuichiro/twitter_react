@@ -21,6 +21,11 @@
             position: relative;
             height: 200px;
             background-color: rgb(223, 218, 218);
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
         }
 
         .profile-image {
@@ -31,7 +36,14 @@
             border: solid 1px;
             top: 190px;
             margin-left: 30px;
-            background-color: rgb(223, 218, 218)
+
+            background-color: rgb(223, 218, 218);
+
+            img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+            }
         }
 
         .bio {
@@ -56,6 +68,23 @@
 
             .bio-text {
                 margin-top: 30px;
+            }
+
+            .bio-other-info {
+                display: flex;
+                gap: 0 10px;
+
+                .birthday,
+                .location,
+                .website {
+                    display: flex;
+                    align-items: center;
+                    gap: 0 5px;
+
+                    p {
+                        margin: 0;
+                    }
+                }
             }
 
             .bio-follow {
