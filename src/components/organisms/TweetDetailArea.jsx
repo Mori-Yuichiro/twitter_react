@@ -4,7 +4,7 @@ import { Tweet } from "../atoms/Tweet";
 import { Button } from "../atoms/Button"
 import { InputField } from "../atoms/InputField"
 import { TweetDetailAreaHook } from "../../hooks/organisms/TweetDetailAreaHook";
-import "../../style/organisms/TweetDetailArea.scss";
+import "../../style/organisms/detail/TweetDetailArea.scss";
 
 
 export const TweetDetailArea = memo(() => {
@@ -17,7 +17,7 @@ export const TweetDetailArea = memo(() => {
                 <h4>Post</h4>
             </div>
             <div className="tweet">
-                <Tweet tweet={tweet} />
+                <Tweet tweet={tweet} user={tweet.user} />
             </div>
             <form action="" className="reply-form">
                 <InputField placeholder="Post your comment" />

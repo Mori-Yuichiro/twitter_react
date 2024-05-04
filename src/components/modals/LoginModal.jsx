@@ -7,7 +7,7 @@ import { IoArrowBack } from "react-icons/io5";
 import '../../style/modal/LoginModal.scss'
 import { InputField } from "../atoms/InputField";
 import { Button } from '../atoms/Button';
-import { useLoginHook } from "../../hooks/loginModal/useLoginHook";
+import { useLoginHook } from "../../hooks/modal/useLoginHook";
 
 
 export const LoginModal = memo(({ showLoginModal, onClickShowLoginModal }) => {

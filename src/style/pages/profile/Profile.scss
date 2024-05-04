@@ -1,4 +1,4 @@
-.tweet-detail {
+.profile {
     display: flex;
     height: 100%;
 
@@ -15,10 +15,11 @@
 
         .nav-tabs {
             .nav-item {
-                width: 50%;
+                width: 16.5%;
 
                 button {
                     width: 100%;
+                    color: #000;
                 }
             }
         }
@@ -37,7 +38,7 @@
 }
 
 @media (max-width: 1000px) {
-    .tweet-detail {
+    .profile {
         .flex-left {
             width: 200px;
         }
@@ -53,7 +54,7 @@
 }
 
 @media (max-width: 600px) {
-    .tweet-detail {
+    .profile {
         .flex-center {
             width: calc(100vw - 200px);
         }

@@ -5,11 +5,13 @@ import { CiBookmark } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import "../../style/atoms/tweet/Tweet.scss"
 
-export const Tweet = ({ tweet }) => {
+export const Tweet = ({ tweet, user }) => {
     return (
         <>
+            <Link to={`/profile/${user.id}`}>
+                <p>{user.name}</p>
+            </Link>
             <Link to={`/tweets/${tweet.id}`}>
-                <p>{tweet.user.name}</p>
                 <p className="tweet-text">{tweet.content}</p>
                 <div className="images">
                     {tweet.image_urls &&

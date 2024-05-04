@@ -12,6 +12,7 @@ import { BsPeople } from "react-icons/bs";
 
 import '../../../style/atoms/toppage/Sidebar.scss'
 import { Button } from "../Button";
+import { Link } from "react-router-dom";
 
 export const Sidebar = ({ currentUserData }) => {
     const ITEM_LIST = [
@@ -34,7 +35,12 @@ export const Sidebar = ({ currentUserData }) => {
                     <div key={i} className="sidebar-menu">
                         <IconContext.Provider value={{ size: '1.4rem' }}>
                             {item.icon}
-                            <p>{item.label}</p>
+                            {(item.label === 'Home') ? (
+                                <Link to='/toppage'><p>{item.label}</p></Link>
+                            ) : (item.label === 'Profile') ? (
+                                <Link to={`/profile/${currentUserData.data.id}`}><p>{item.label}</p></Link>
+                            ) : (<Link to={`/${item.label}`}><p>{item.label}</p></Link >
+                            )}
                         </IconContext.Provider>
                     </div>
                 );

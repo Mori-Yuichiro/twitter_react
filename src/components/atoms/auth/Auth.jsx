@@ -6,7 +6,10 @@ export const Auth = memo(({ children }) => {
     const { cookies } = useContext(CookieContext);
     const location = useLocation();
     const regexTweetDetail = /\/tweets\/\d+/;
-    const isOnHome = (location.pathname === '/toppage') || regexTweetDetail.test(location.pathname);
+    const regexProfile = /\/profile\/\d+/;
+    const isOnHome = (location.pathname === '/toppage')
+        || regexTweetDetail.test(location.pathname)
+        || regexProfile.test(location.pathname);
 
     if (!cookies['access-token'] && isOnHome) return <Navigate replace to="/" />;
     if (cookies['access-token'] && isOnHome) return (

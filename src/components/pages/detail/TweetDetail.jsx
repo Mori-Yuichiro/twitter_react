@@ -1,13 +1,11 @@
-import { useContext } from "react";
 import { RightSidebar } from "../../atoms/toppage/RightSidebar"
 import { Sidebar } from "../../atoms/toppage/Sidebar"
-import { currentUserContext } from "../../../providers/TwitterProvider";
 import { Header } from "../../atoms/toppage/Header";
 import { TweetDetailArea } from "../../organisms/TweetDetailArea";
 import "../../../style/pages/detail/TweetDetail.scss";
 
 export const TweetDetail = () => {
-    const { currentUserData } = useContext(currentUserContext);
+    const currentUserData = JSON.parse(sessionStorage.getItem('currentUserData'));
 
     return (
         <div className="tweet-detail">
