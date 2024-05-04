@@ -36,7 +36,7 @@ export const Sidebar = ({ currentUserData }) => {
                         <IconContext.Provider value={{ size: '1.4rem' }}>
                             {item.icon}
                             {(item.label === 'Home') ? (
-                                <Link to={'/toppage'}><p>{item.label}</p></Link>
+                                <Link to='/toppage'><p>{item.label}</p></Link>
                             ) : (item.label === 'Profile') ? (
                                 <Link to={`/profile/${currentUserData.data.id}`}><p>{item.label}</p></Link>
                             ) : (<Link to={`/${item.label}`}><p>{item.label}</p></Link >

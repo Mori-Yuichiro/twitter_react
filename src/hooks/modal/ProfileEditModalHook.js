@@ -9,11 +9,11 @@ export const ProfileEditModalHook = (showProfileEditModal, setShowProfileEditMod
     const { currentUser } = AuthHook();
     const currentUserData = JSON.parse(sessionStorage.getItem('currentUserData'));
     const [newProfile, setNewProfile] = useState({
-        'name': currentUserData.data.name,
-        'bio': currentUserData.data.bio,
-        'birthday': currentUserData.data.birthday,
-        'location': currentUserData.data.location,
-        'website': currentUserData.data.website
+        name: currentUserData.data.name,
+        bio: currentUserData.data.bio,
+        birthday: currentUserData.data.birthday,
+        location: currentUserData.data.location,
+        website: currentUserData.data.website
     });
 
     const editProfile = useCallback(async (e) => {
@@ -33,6 +33,11 @@ export const ProfileEditModalHook = (showProfileEditModal, setShowProfileEditMod
             console.log(error);
         }
     }, [instance, newProfile, setShowProfileEditModal, showProfileEditModal])
+
+    const onChangeNewProfile = (e) => {
+        const { name, value } = e.target
+        setNewProfile({ ...newProfile, [name]: value })
+    }
 
     const fileRead = async (file) => {
         const fileReader = new FileReader();
@@ -65,6 +70,7 @@ export const ProfileEditModalHook = (showProfileEditModal, setShowProfileEditMod
         newProfile,
         setNewProfile,
         editProfile,
+        onChangeNewProfile,
         selectHeaderImage,
         selectProfileImage
     };

@@ -14,6 +14,7 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
         newProfile,
         setNewProfile,
         editProfile,
+        onChangeNewProfile,
         selectHeaderImage,
         selectProfileImage
     } = ProfileEditModalHook(showProfileEditModal, setShowProfileEditModal);
@@ -39,20 +40,14 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
                                 name='name'
                                 value={newProfile.name}
                                 placeholder='Name'
-                                onChange={(e) => setNewProfile({
-                                    ...newProfile,
-                                    'name': e.target.value
-                                })}
+                                onChange={onChangeNewProfile}
                             />
                             <InputField
                                 type='text'
                                 name='bio'
                                 value={newProfile.bio}
                                 placeholder='Bio'
-                                onChange={(e) => setNewProfile({
-                                    ...newProfile,
-                                    'bio': e.target.value
-                                })}
+                                onChange={onChangeNewProfile}
                             />
                             <InputField
                                 type='text'
@@ -69,20 +64,14 @@ export const ProfileEditModal = memo(({ showProfileEditModal, setShowProfileEdit
                                 name='location'
                                 value={newProfile.location}
                                 placeholder='Locaiton'
-                                onChange={(e) => setNewProfile({
-                                    ...newProfile,
-                                    'location': e.target.value
-                                })}
+                                onChange={onChangeNewProfile}
                             />
                             <InputField
                                 type='text'
                                 name='website'
                                 value={newProfile.website}
                                 placeholder='Website'
-                                onChange={(e) => setNewProfile({
-                                    ...newProfile,
-                                    'website': e.target.value
-                                })}
+                                onChange={onChangeNewProfile}
                             />
                             <Form.Group controlId="formFile" className="mb-3">
                                 <Form.Label>Header Image</Form.Label>
