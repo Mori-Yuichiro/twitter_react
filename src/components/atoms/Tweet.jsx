@@ -6,13 +6,16 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import "../../style/atoms/tweet/Tweet.scss"
 import { TweetHook } from "../../hooks/atoms/TweetHook";
+import { CommentModal } from "../modals/CommentModal";
 
 export const Tweet = ({ tweet, user }) => {
     const {
         currentUserData,
         regexProfile,
         location,
-        deleteTweet
+        deleteTweet,
+        showCommentModal,
+        setShowCommentModal
     } = TweetHook(tweet);
 
     return (
@@ -34,11 +37,16 @@ export const Tweet = ({ tweet, user }) => {
                 </div>
             </Link >
             <div className="icon-area">
-                <HiOutlineChatBubbleLeft />
+                <HiOutlineChatBubbleLeft className="comment-icon" onClick={() => setShowCommentModal(!showCommentModal)} />
                 <AiOutlineRetweet />
                 <CiHeart />
                 <CiBookmark />
             </div>
+            <CommentModal
+                showCommentModal={showCommentModal}
+                setShowCommentModal={setShowCommentModal}
+                tweet_id={tweet.id}
+            />
         </>
     );
 }
