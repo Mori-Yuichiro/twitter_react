@@ -1,6 +1,7 @@
 import { memo } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Tweet } from "../atoms/Tweet";
+import { Comment } from "../atoms/Comment";
 import { Button } from "../atoms/Button"
 import { InputField } from "../atoms/InputField"
 import { TweetDetailAreaHook } from "../../hooks/organisms/TweetDetailAreaHook";
@@ -8,7 +9,7 @@ import "../../style/organisms/detail/TweetDetailArea.scss";
 
 
 export const TweetDetailArea = memo(() => {
-    const { tweet, navigate } = TweetDetailAreaHook();
+    const { tweet, navigate, comments } = TweetDetailAreaHook();
 
     return (
         <div className="tweet-detail-area">
@@ -23,6 +24,15 @@ export const TweetDetailArea = memo(() => {
                 <InputField placeholder="Post your comment" />
                 <Button>Comment</Button>
             </form>
+            <div className="comments">
+                {comments.map((comment, i) => {
+                    return (
+                        <div key={i} className="comment">
+                            <Comment comment={comment} user={comment.user} />
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     );
 })
