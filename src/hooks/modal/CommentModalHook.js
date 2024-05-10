@@ -27,6 +27,7 @@ export const CommentModalHook = (showCommentModal, setShowCommentModal, tweet_id
             console.log(resComment);
             setShowCommentModal(!showCommentModal);
             setComment({ content: '' })
+            window.location.reload();
         } catch (error) {
             console.log(error);
         }

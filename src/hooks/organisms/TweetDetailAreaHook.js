@@ -11,6 +11,15 @@ export const TweetDetailAreaHook = () => {
         image_urls: null,
         content: ''
     });
+    const [comments, setComments] = useState([
+        {
+            content: '',
+            user: {
+                name: ''
+            }
+        }
+    ]);
+
     const { instance } = AxiosInstance();
     const location = useLocation();
 
@@ -18,6 +27,10 @@ export const TweetDetailAreaHook = () => {
         try {
             const tweetDetail = await instance.get(`/api/v1/${location.pathname}`);
             setTweet(tweetDetail.data.tweet);
+
+            const tweetId = tweetDetail.data.tweet.id;
+            const comments = await instance.get(`/api/v1/tweets/${tweetId}/comments`);
+            setComments(comments.data.comments);
         } catch (error) {
             console.log(error);
         }
@@ -31,5 +44,5 @@ export const TweetDetailAreaHook = () => {
         doGetTweetDetail();
     }, [])
 
-    return { tweet, navigate };
+    return { tweet, navigate, comments };
 }
