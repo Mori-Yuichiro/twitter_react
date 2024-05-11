@@ -6,13 +6,25 @@ import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 import { Button } from "../atoms/Button";
-import { Tweet } from "../atoms/Tweet";
 import { ProfileAreaHook } from "../../hooks/organisms/ProfileAreaHook";
 import "../../style/organisms/profile/ProfileArea.scss"
+import { ProfileTweet } from "../molecules/profile/ProfileTweet";
+import { ProfileComment } from "../molecules/profile/ProfileComment";
 
 
 export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) => {
-    const { currentUserData, navigate, profile, profileTweets, userId } = ProfileAreaHook(showProfileEditModal);
+    const {
+        currentUserData,
+        navigate,
+        profile,
+        profileTweets,
+        userId,
+        selectTab,
+        profileComments,
+        defaultTab,
+        onSelectTab
+    } = ProfileAreaHook(showProfileEditModal);
+
 
     return (
         <div className="profile-area">
@@ -60,26 +72,30 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                 </div>
                 <div className="profile-tweet">
                     <Tabs
-                        defaultActiveKey="posts"
+                        // defaultActiveKey="posts"
+                        defaultActiveKey={defaultTab}
                         id="uncontrolled-tab-example"
                         className="mb-3"
+                        onSelect={tab => onSelectTab(tab)}
                     >
                         <Tab eventKey="posts" title="Posts" />
-                        <Tab eventKey="replies" title="Replies" />
+                        <Tab eventKey="comments" title="Comments" />
                         <Tab eventKey="highlights" title="Highlights" />
                         <Tab eventKey="articles" title="Articles" />
                         <Tab eventKey="media" title="Media" />
                         <Tab eventKey="likes" title="Likes" />
                     </Tabs>
-                    <div className="tweet-area">
-                        {profileTweets.map((tweet, i) => {
-                            return (
-                                <div className="tweet" key={i}>
-                                    <Tweet tweet={tweet} user={profile.user} />
-                                </div>
-                            );
-                        })}
-                    </div>
+                    {(selectTab === 'posts') ? (
+                        <ProfileTweet
+                            profileTweets={profileTweets}
+                            profile={profile}
+                        />
+                    ) : (selectTab === 'comments') ? (
+                        <ProfileComment
+                            profileComments={profileComments}
+                            profile={profile}
+                        />
+                    ) : <div></div>}
                 </div>
             </div>
         </div>
