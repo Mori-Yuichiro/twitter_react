@@ -20,13 +20,22 @@ export const ProfileAreaHook = (showProfileEditModal) => {
         }
     });
 
+    // クエリパラメータをtabのデフォルトキーに設定
+    const search = useLocation().search;
+    const query = new URLSearchParams(search);
+    const defaultTab = (query.get('tab') === null) ? 'posts' : query.get('tab');
+
+    const [selectTab, setSelectTab] = useState(defaultTab);
+
     const [profileTweets, setProfileTweets] = useState([]);
+    const [profileComments, setProfileComments] = useState([]);
 
     const getUserProfile = useCallback(async () => {
         try {
             const profileData = await instance.get(`/api/v1/users/${userId}`);
             setProfile(profileData.data);
             setProfileTweets([...profileData.data.user.tweets].reverse());
+            setProfileComments([...profileData.data.user.comments].reverse());
         } catch (error) {
             console.log(error);
         }
@@ -40,11 +49,20 @@ export const ProfileAreaHook = (showProfileEditModal) => {
         doGetUserProfile();
     }, [showProfileEditModal])
 
+    const onSelectTab = useCallback((tab) => {
+        setSelectTab(tab);
+        navigate(`/profile/${profile.user.id}?tab=${tab}`);
+    }, [navigate, profile.user.id])
+
     return {
         currentUserData,
         navigate,
         profile,
         profileTweets,
-        userId
+        userId,
+        selectTab,
+        profileComments,
+        defaultTab,
+        onSelectTab
     };
 }
