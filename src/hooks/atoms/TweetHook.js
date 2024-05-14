@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { AxiosInstance } from "../../axios/axiosInstance";
 
+
 export const TweetHook = (tweet) => {
     const { instance } = AxiosInstance();
     const currentUserData = JSON.parse(sessionStorage.getItem('currentUserData'));
@@ -17,12 +18,32 @@ export const TweetHook = (tweet) => {
         }
     }, [])
 
+    const createRetweet = useCallback(async () => {
+        try {
+            await instance.post(`/api/v1/tweets/${tweet.id}/retweets`);
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }, [instance, tweet.id])
+
+    const deleteRetweet = useCallback(async () => {
+        try {
+            await instance.delete(`/api/v1/tweets/${tweet.id}/retweets`);
+            window.location.reload()
+        } catch (error) {
+            console.log(error);
+        }
+    }, [instance, tweet.id])
+
     return {
         currentUserData,
         regexProfile,
         location,
         deleteTweet,
         showCommentModal,
-        setShowCommentModal
+        setShowCommentModal,
+        createRetweet,
+        deleteRetweet
     }
 }

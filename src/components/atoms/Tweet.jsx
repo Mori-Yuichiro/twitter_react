@@ -15,11 +15,18 @@ export const Tweet = ({ tweet, user }) => {
         location,
         deleteTweet,
         showCommentModal,
-        setShowCommentModal
+        setShowCommentModal,
+        createRetweet,
+        deleteRetweet
     } = TweetHook(tweet);
+
 
     return (
         <>
+            {(tweet.retweets.find(retweet => retweet.user_id === currentUserData.data.id)) ?
+                <p className="is-retweet-text">リツイート済み</p>
+                : <div></div>
+            }
             <div className="tweet-name-dots">
                 <Link to={`/profile/${user.id}`}>
                     <p>{user.name}</p>
@@ -38,7 +45,13 @@ export const Tweet = ({ tweet, user }) => {
             </Link >
             <div className="icon-area">
                 <HiOutlineChatBubbleLeft className="comment-icon" onClick={() => setShowCommentModal(!showCommentModal)} />
-                <AiOutlineRetweet />
+                <div className="retweet">
+                    {(tweet.retweets.find(retweet => retweet.user_id === currentUserData.data.id)) ? <AiOutlineRetweet className="retweet-icon active" onClick={deleteRetweet} />
+                        :
+                        <AiOutlineRetweet className="retweet-icon" onClick={createRetweet} />
+                    }
+                    <p>{tweet.retweets_count}</p>
+                </div>
                 <CiHeart />
                 <CiBookmark />
             </div>
