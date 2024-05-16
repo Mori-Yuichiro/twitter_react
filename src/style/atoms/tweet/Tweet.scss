@@ -1,4 +1,9 @@
 .tweet {
+    .is-retweet-text {
+        font-size: 0.725rem;
+        color: rgb(157, 155, 155);
+    }
+
     .tweet-name-dots {
         display: flex;
         justify-content: space-between;
@@ -26,9 +31,27 @@
         margin: 20px 0 10px 0;
         display: flex;
         justify-content: space-between;
+        align-items: center;
 
         .comment-icon {
             cursor: pointer;
+        }
+
+        .retweet {
+            display: flex;
+            align-items: center;
+
+            .retweet-icon {
+                cursor: pointer;
+            }
+
+            .retweet-icon.active {
+                color: rgb(3, 233, 156);
+            }
+
+            p {
+                margin: 0;
+            }
         }
     }
 }

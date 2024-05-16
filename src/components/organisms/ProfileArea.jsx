@@ -10,6 +10,7 @@ import { ProfileAreaHook } from "../../hooks/organisms/ProfileAreaHook";
 import "../../style/organisms/profile/ProfileArea.scss"
 import { ProfileTweet } from "../molecules/profile/ProfileTweet";
 import { ProfileComment } from "../molecules/profile/ProfileComment";
+import { ProfileRetweet } from "../molecules/profile/ProfileRetweet";
 
 
 export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) => {
@@ -22,7 +23,8 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
         selectTab,
         profileComments,
         defaultTab,
-        onSelectTab
+        onSelectTab,
+        profileRetweet
     } = ProfileAreaHook(showProfileEditModal);
 
 
@@ -80,7 +82,7 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                     >
                         <Tab eventKey="posts" title="Posts" />
                         <Tab eventKey="comments" title="Comments" />
-                        <Tab eventKey="highlights" title="Highlights" />
+                        <Tab eventKey="retweets" title="Retweets" />
                         <Tab eventKey="articles" title="Articles" />
                         <Tab eventKey="media" title="Media" />
                         <Tab eventKey="likes" title="Likes" />
@@ -94,6 +96,11 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                         <ProfileComment
                             profileComments={profileComments}
                             profile={profile}
+                        />
+                    ) : (selectTab === 'retweets') ? (
+                        <ProfileRetweet
+                            profileRetweet={profileRetweet[0]}
+                            users={profileRetweet[1]}
                         />
                     ) : <div></div>}
                 </div>
