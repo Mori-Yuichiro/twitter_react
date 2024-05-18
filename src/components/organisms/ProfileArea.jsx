@@ -11,6 +11,7 @@ import "../../style/organisms/profile/ProfileArea.scss"
 import { ProfileTweet } from "../molecules/profile/ProfileTweet";
 import { ProfileComment } from "../molecules/profile/ProfileComment";
 import { ProfileRetweet } from "../molecules/profile/ProfileRetweet";
+import { ProfileFavorite } from "../molecules/profile/ProfileFavorite";
 
 
 export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) => {
@@ -24,7 +25,8 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
         profileComments,
         defaultTab,
         onSelectTab,
-        profileRetweet
+        profileRetweet,
+        profileFavorite
     } = ProfileAreaHook(showProfileEditModal);
 
 
@@ -74,7 +76,6 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                 </div>
                 <div className="profile-tweet">
                     <Tabs
-                        // defaultActiveKey="posts"
                         defaultActiveKey={defaultTab}
                         id="uncontrolled-tab-example"
                         className="mb-3"
@@ -83,7 +84,7 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                         <Tab eventKey="posts" title="Posts" />
                         <Tab eventKey="comments" title="Comments" />
                         <Tab eventKey="retweets" title="Retweets" />
-                        <Tab eventKey="articles" title="Articles" />
+                        <Tab eventKey="favorites" title="Favorites" />
                         <Tab eventKey="media" title="Media" />
                         <Tab eventKey="likes" title="Likes" />
                     </Tabs>
@@ -101,6 +102,11 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                         <ProfileRetweet
                             profileRetweet={profileRetweet[0]}
                             users={profileRetweet[1]}
+                        />
+                    ) : (selectTab === 'favorites') ? (
+                        <ProfileFavorite
+                            profileFavorite={profileFavorite[0]}
+                            users={profileFavorite[1]}
                         />
                     ) : <div></div>}
                 </div>
