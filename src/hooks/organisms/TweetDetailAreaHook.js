@@ -10,7 +10,8 @@ export const TweetDetailAreaHook = () => {
         },
         image_urls: null,
         content: '',
-        retweets: ['']
+        retweets: [''],
+        nices: ['']
     });
     const [comments, setComments] = useState([
         {

@@ -36,6 +36,24 @@ export const TweetHook = (tweet) => {
         }
     }, [instance, tweet.id])
 
+    const createFavorite = useCallback(async () => {
+        try {
+            await instance.post(`/api/v1/tweets/${tweet.id}/favorites`);
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }, [instance, tweet.id])
+
+    const deleteFavorite = useCallback(async () => {
+        try {
+            await instance.delete(`/api/v1/tweets/${tweet.id}/favorites`);
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }, [instance, tweet.id])
+
     return {
         currentUserData,
         regexProfile,
@@ -44,6 +62,8 @@ export const TweetHook = (tweet) => {
         showCommentModal,
         setShowCommentModal,
         createRetweet,
-        deleteRetweet
+        deleteRetweet,
+        createFavorite,
+        deleteFavorite
     }
 }

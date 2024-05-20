@@ -1,6 +1,7 @@
 import { HiOutlineChatBubbleLeft } from "react-icons/hi2";
 import { AiOutlineRetweet } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
+import { FaHeart } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router-dom";
@@ -17,7 +18,9 @@ export const Tweet = ({ tweet, user }) => {
         showCommentModal,
         setShowCommentModal,
         createRetweet,
-        deleteRetweet
+        deleteRetweet,
+        createFavorite,
+        deleteFavorite
     } = TweetHook(tweet);
 
 
@@ -52,7 +55,16 @@ export const Tweet = ({ tweet, user }) => {
                     }
                     <p>{tweet.retweets_count}</p>
                 </div>
-                <CiHeart />
+                <div className="favorite">
+                    {(tweet.nices.find(nice => nice.user_id === currentUserData.data.id)) ? <FaHeart
+                        className="favorite-icon active"
+                        onClick={deleteFavorite}
+                    /> : <CiHeart
+                        className="favorite-icon"
+                        onClick={createFavorite}
+                    />}
+                    <p>{tweet.nices_count}</p>
+                </div>
                 <CiBookmark />
             </div>
             <CommentModal

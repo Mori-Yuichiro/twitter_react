@@ -30,6 +30,7 @@ export const ProfileAreaHook = (showProfileEditModal) => {
     const [profileTweets, setProfileTweets] = useState([]);
     const [profileComments, setProfileComments] = useState([]);
     const [profileRetweet, setProfileRetweet] = useState([]);
+    const [profileFavorite, setProfileFavorite] = useState([]);
 
     const getUserProfile = useCallback(async () => {
         try {
@@ -38,6 +39,7 @@ export const ProfileAreaHook = (showProfileEditModal) => {
             setProfileTweets([...profileData.data.user.tweets].reverse());
             setProfileComments([...profileData.data.user.comments].reverse());
             setProfileRetweet(profileData.data.user.retweet_tweet);
+            setProfileFavorite(profileData.data.user.nice_tweet);
         } catch (error) {
             console.log(error);
         }
@@ -66,6 +68,7 @@ export const ProfileAreaHook = (showProfileEditModal) => {
         profileComments,
         defaultTab,
         onSelectTab,
-        profileRetweet
+        profileRetweet,
+        profileFavorite
     };
 }
