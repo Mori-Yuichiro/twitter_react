@@ -1,10 +1,16 @@
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useContext, useEffect, useState } from "react"
 import { AxiosInstance } from "../../axios/axiosInstance"
 import { useLocation, useNavigate } from "react-router-dom";
+import { CookieContext } from "../../providers/TwitterProvider";
+import { AuthHook } from "../auth/authHook";
 
 export const ProfileAreaHook = (showProfileEditModal) => {
     const { instance } = AxiosInstance();
-    const currentUserData = JSON.parse(sessionStorage.getItem('currentUserData'));
+    const [currentUserData, setCurrentUserData] = useState(
+        JSON.parse(sessionStorage.getItem('currentUserData'))
+    );
+    const { cookies } = useContext(CookieContext);
+    const { currentUser } = AuthHook();
     const navigate = useNavigate();
     const location = useLocation();
     const pathArray = location.pathname.split('/');
@@ -16,7 +22,9 @@ export const ProfileAreaHook = (showProfileEditModal) => {
                 {
                     content: ''
                 }
-            ]
+            ],
+            following: [],
+            followers: [],
         }
     });
 
@@ -29,8 +37,34 @@ export const ProfileAreaHook = (showProfileEditModal) => {
 
     const [profileTweets, setProfileTweets] = useState([]);
     const [profileComments, setProfileComments] = useState([]);
-    const [profileRetweet, setProfileRetweet] = useState([]);
-    const [profileFavorite, setProfileFavorite] = useState([]);
+    const [profileRetweet, setProfileRetweet] = useState([
+        [
+            {
+                content: ''
+            }
+        ],
+        [
+            {
+                name: ''
+            }
+        ]
+    ]);
+    const [profileFavorite, setProfileFavorite] = useState([
+        [
+            {
+                content: ''
+            }
+        ],
+        [
+            {
+                name: ''
+            }
+        ]
+    ]);
+
+    // follow関連
+    const [following, setFollowing] = useState([]);
+    const [followers, setFollowers] = useState([]);
 
     const getUserProfile = useCallback(async () => {
         try {
@@ -40,6 +74,8 @@ export const ProfileAreaHook = (showProfileEditModal) => {
             setProfileComments([...profileData.data.user.comments].reverse());
             setProfileRetweet(profileData.data.user.retweet_tweet);
             setProfileFavorite(profileData.data.user.nice_tweet);
+            setFollowing(profileData.data.user.following);
+            setFollowers(profileData.data.user.followers);
         } catch (error) {
             console.log(error);
         }
@@ -49,14 +85,30 @@ export const ProfileAreaHook = (showProfileEditModal) => {
         await getUserProfile();
     }, [getUserProfile]);
 
-    useEffect(() => {
-        doGetUserProfile();
-    }, [showProfileEditModal])
-
     const onSelectTab = useCallback((tab) => {
         setSelectTab(tab);
         navigate(`/profile/${profile.user.id}?tab=${tab}`);
     }, [navigate, profile.user.id])
+
+    const getCurrentUser = useCallback(async () => {
+        return await currentUser(cookies);
+    }, [cookies, currentUser])
+
+    const onClickFollow = useCallback(async () => {
+        try {
+            await instance.post(`/api/v1/users/${profile.user.id}/follow`);
+            // フォロー後にプロフィール画面とsessionStorageを更新
+            const currentUser = await getCurrentUser();
+            setCurrentUserData(currentUser.data);
+            sessionStorage.setItem('currentUserData', JSON.stringify(currentUser.data));
+        } catch (error) {
+            console.log(error);
+        }
+    }, [profile.user.id])
+
+    useEffect(() => {
+        doGetUserProfile();
+    }, [showProfileEditModal, onClickFollow])
 
     return {
         currentUserData,
@@ -69,6 +121,9 @@ export const ProfileAreaHook = (showProfileEditModal) => {
         defaultTab,
         onSelectTab,
         profileRetweet,
-        profileFavorite
+        profileFavorite,
+        following,
+        followers,
+        onClickFollow
     };
 }
