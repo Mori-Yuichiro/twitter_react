@@ -101,6 +101,20 @@ export const ProfileAreaHook = (showProfileEditModal) => {
             const currentUser = await getCurrentUser();
             setCurrentUserData(currentUser.data);
             sessionStorage.setItem('currentUserData', JSON.stringify(currentUser.data));
+            doGetUserProfile();
+        } catch (error) {
+            console.log(error);
+        }
+    }, [profile.user.id])
+
+    const onClickUnFollow = useCallback(async () => {
+        try {
+            await instance.delete(`/api/v1/users/${profile.user.id}/unfollow`);
+            // フォロー後にプロフィール画面とsessionStorageを更新
+            const currentUser = await getCurrentUser();
+            setCurrentUserData(currentUser.data);
+            sessionStorage.setItem('currentUserData', JSON.stringify(currentUser.data));
+            doGetUserProfile();
         } catch (error) {
             console.log(error);
         }
@@ -108,7 +122,7 @@ export const ProfileAreaHook = (showProfileEditModal) => {
 
     useEffect(() => {
         doGetUserProfile();
-    }, [showProfileEditModal, onClickFollow])
+    }, [showProfileEditModal])
 
     return {
         currentUserData,
@@ -124,6 +138,7 @@ export const ProfileAreaHook = (showProfileEditModal) => {
         profileFavorite,
         following,
         followers,
-        onClickFollow
+        onClickFollow,
+        onClickUnFollow
     };
 }

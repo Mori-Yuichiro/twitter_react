@@ -29,7 +29,8 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
         profileFavorite,
         following,
         followers,
-        onClickFollow
+        onClickFollow,
+        onClickUnFollow
     } = ProfileAreaHook(showProfileEditModal);
 
 
@@ -55,7 +56,7 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                             (currentUserData.data.id !== Number(userId)) && (
                                 <>
                                     {currentUserData.data.following.find(follow => follow.id === Number(userId)) ?
-                                        <Button>Following</Button> : <Button onClick={onClickFollow}>Follow</Button>
+                                        <Button onClick={onClickUnFollow}>Following</Button> : <Button onClick={onClickFollow}>Follow</Button>
                                     }
                                 </>
                             )
