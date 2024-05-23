@@ -52,14 +52,14 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                             <Button onClick={() => setShowProfileEditModal(!showProfileEditModal)}>Edit profile</Button>
                         }
                         {
-                            (currentUserData.data.id !== Number(userId) &&
-                                currentUserData.data.following.find(follow => follow.id === Number(userId))) &&
-                            <Button>Following</Button>
-                        }
-                        {
-                            (currentUserData.data.id !== Number(userId) &&
-                                !currentUserData.data.following.find(follow => follow.id === Number(userId))) &&
-                            <Button onClick={onClickFollow}>Follow</Button>
+                            (currentUserData.data.id !== Number(userId)) && (
+                                <>
+                                    {currentUserData.data.following.find(follow => follow.id === Number(userId)) ?
+                                        <Button>Following</Button> : <Button onClick={onClickFollow}>Follow</Button>
+                                    }
+                                </>
+                            )
+
                         }
                     </div>
                     <div className="bio-name">
