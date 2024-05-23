@@ -26,7 +26,10 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
         defaultTab,
         onSelectTab,
         profileRetweet,
-        profileFavorite
+        profileFavorite,
+        following,
+        followers,
+        onClickFollow
     } = ProfileAreaHook(showProfileEditModal);
 
 
@@ -47,6 +50,16 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                     <div className="edit-profile-button">
                         {(currentUserData.data.id === Number(userId)) &&
                             <Button onClick={() => setShowProfileEditModal(!showProfileEditModal)}>Edit profile</Button>
+                        }
+                        {
+                            (currentUserData.data.id !== Number(userId)) && (
+                                <>
+                                    {currentUserData.data.following.find(follow => follow.id === Number(userId)) ?
+                                        <Button>Following</Button> : <Button onClick={onClickFollow}>Follow</Button>
+                                    }
+                                </>
+                            )
+
                         }
                     </div>
                     <div className="bio-name">
@@ -70,8 +83,8 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                         </div>
                     </div>
                     <div className="bio-follow">
-                        <p>0 Following</p>
-                        <p>0 Followers</p>
+                        <p>{following.length} Following</p>
+                        <p>{followers.length} Followers</p>
                     </div>
                 </div>
                 <div className="profile-tweet">
