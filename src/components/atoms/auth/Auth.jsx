@@ -9,7 +9,8 @@ export const Auth = memo(({ children }) => {
     const regexProfile = /\/profile\/\d+/;
     const isOnHome = (location.pathname === '/toppage')
         || regexTweetDetail.test(location.pathname)
-        || regexProfile.test(location.pathname);
+        || regexProfile.test(location.pathname)
+        || (location.pathname === '/notifications');
 
     if (!cookies['access-token'] && isOnHome) return <Navigate replace to="/" />;
     if (cookies['access-token'] && isOnHome) return (

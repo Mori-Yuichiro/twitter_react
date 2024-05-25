@@ -3,6 +3,7 @@ import { Auth } from '../components/atoms/auth/Auth';
 import { Home } from "../components/pages/home/home";
 import { Toppage } from "../components/pages/toppage/Toppage";
 import { Profile } from "../components/pages/profile/Profile";
+import { Notification } from "../components/pages/notification/Notification";
 
 export const TweetRoutes = [
     {
@@ -24,5 +25,10 @@ export const TweetRoutes = [
         path: '/profile/:id',
         exact: false,
         children: <Auth><Profile /></Auth>
+    },
+    {
+        path: '/notifications',
+        exact: true,
+        children: <Auth><Notification /></Auth>
     }
 ];
