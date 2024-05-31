@@ -41,6 +41,8 @@ export const Sidebar = ({ currentUserData }) => {
                                 <Link to={`/profile/${currentUserData.data.id}`}><p>{item.label}</p></Link>
                             ) : (item.label === 'Notification') ? (
                                 <Link to='/notifications'><p>{item.label}</p></Link>
+                            ) : (item.label === 'Message') ? (
+                                <Link to='/groups'><p>{item.label}</p></Link>
                             ) : (<Link to={`/${item.label}`}><p>{item.label}</p></Link >
                             )}
                         </IconContext.Provider>

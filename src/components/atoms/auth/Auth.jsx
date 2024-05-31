@@ -7,10 +7,13 @@ export const Auth = memo(({ children }) => {
     const location = useLocation();
     const regexTweetDetail = /\/tweets\/\d+/;
     const regexProfile = /\/profile\/\d+/;
+    const regexGroup = /\/groups\/\d+/;
     const isOnHome = (location.pathname === '/toppage')
         || regexTweetDetail.test(location.pathname)
         || regexProfile.test(location.pathname)
-        || (location.pathname === '/notifications');
+        || (location.pathname === '/notifications')
+        || (location.pathname === '/groups')
+        || regexGroup.test(location.pathname);
 
     if (!cookies['access-token'] && isOnHome) return <Navigate replace to="/" />;
     if (cookies['access-token'] && isOnHome) return (
