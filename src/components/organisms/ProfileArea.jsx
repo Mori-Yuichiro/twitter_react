@@ -55,7 +55,7 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                             <>
                                 {currentUserData.data.following.find(following => following.id === Number(userId)) &&
                                     <div className="msg-btn">
-                                        <Button onClick={() => moveGroupArea()}>
+                                        <Button onClick={moveGroupArea}>
                                             <FaRegEnvelope />
                                         </Button>
                                     </div>

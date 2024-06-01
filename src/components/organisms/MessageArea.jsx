@@ -19,13 +19,12 @@ export const MessageArea = memo(({ currentUserData }) => {
                 <h4>{anotherUser.name}</h4>
             </div>
             {messages.map((message, i) => (
-                <div className="messages" key={i}>
-                    {(currentUserData.data.id === message.user_id) ? (
-                        <p className="my-message">{message.message}</p>
-                    ) : (
-                        <p className="opponent-message">{message.message}</p>
-                    )
-                    }
+                <div className="messages" key={`messages-${i}`}>
+                    <p
+                        className={(currentUserData.data.id === message.user_id) ? "my-message" : "opponent-message"}
+                    >
+                        {message.message}
+                    </p>
                 </div>
             ))}
             <form className="form" onSubmit={submitMessage}>

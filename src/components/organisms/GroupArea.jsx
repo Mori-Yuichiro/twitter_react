@@ -12,7 +12,7 @@ export const GroupArea = () => {
             </div>
             <div className="groups">
                 {entries.map((entry, i) => (
-                    <div className="entry" key={i}>
+                    <div className="entry" key={`entry-${i}`}>
                         <Entry entry={entry} />
                     </div>
                 ))}
