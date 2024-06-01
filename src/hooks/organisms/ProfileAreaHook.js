@@ -25,7 +25,9 @@ export const ProfileAreaHook = (showProfileEditModal) => {
             ],
             following: [],
             followers: [],
-        }
+        },
+        is_group: false,
+        group_id: 0
     });
 
     // クエリパラメータをtabのデフォルトキーに設定
@@ -120,6 +122,17 @@ export const ProfileAreaHook = (showProfileEditModal) => {
         }
     }, [profile.user.id])
 
+    const moveGroupArea = useCallback(async () => {
+        if (!profile.is_group) {
+            const makeEntry = await instance.post('/api/v1/groups', {
+                user_id: profile.user.id
+            });
+            navigate(`/groups/${makeEntry.data.another_entry.group_id}`);
+        } else {
+            navigate(`/groups/${profile.group_id}`);
+        }
+    }, [profile])
+
     useEffect(() => {
         doGetUserProfile();
     }, [showProfileEditModal])
@@ -139,6 +152,7 @@ export const ProfileAreaHook = (showProfileEditModal) => {
         following,
         followers,
         onClickFollow,
-        onClickUnFollow
+        onClickUnFollow,
+        moveGroupArea,
     };
 }

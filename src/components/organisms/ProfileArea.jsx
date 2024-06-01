@@ -2,6 +2,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
 import { LiaBirthdayCakeSolid } from "react-icons/lia";
 import { CgWebsite } from "react-icons/cg";
+import { FaRegEnvelope } from "react-icons/fa";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
@@ -30,7 +31,8 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
         following,
         followers,
         onClickFollow,
-        onClickUnFollow
+        onClickUnFollow,
+        moveGroupArea
     } = ProfileAreaHook(showProfileEditModal);
 
 
@@ -49,6 +51,17 @@ export const ProfileArea = ({ showProfileEditModal, setShowProfileEditModal }) =
                 </div>
                 <div className="bio">
                     <div className="edit-profile-button">
+                        {(currentUserData.data.id !== Number(userId)) &&
+                            <>
+                                {currentUserData.data.following.find(following => following.id === Number(userId)) &&
+                                    <div className="msg-btn">
+                                        <Button onClick={moveGroupArea}>
+                                            <FaRegEnvelope />
+                                        </Button>
+                                    </div>
+                                }
+                            </>
+                        }
                         {(currentUserData.data.id === Number(userId)) &&
                             <Button onClick={() => setShowProfileEditModal(!showProfileEditModal)}>Edit profile</Button>
                         }

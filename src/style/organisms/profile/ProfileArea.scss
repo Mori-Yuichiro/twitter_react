@@ -50,8 +50,10 @@
             padding: 15px 15px;
 
             .edit-profile-button {
-                text-align: right;
                 height: 35px;
+                display: flex;
+                justify-content: end;
+                gap: 0 20px;
 
                 button {
                     border: solid 0.5px;

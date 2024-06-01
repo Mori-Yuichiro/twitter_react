@@ -4,6 +4,8 @@ import { Home } from "../components/pages/home/home";
 import { Toppage } from "../components/pages/toppage/Toppage";
 import { Profile } from "../components/pages/profile/Profile";
 import { Notification } from "../components/pages/notification/Notification";
+import { Group } from "../components/pages/group/Group";
+import { GroupDetail } from "../components/pages/group/GroupDetail";
 
 export const TweetRoutes = [
     {
@@ -30,5 +32,15 @@ export const TweetRoutes = [
         path: '/notifications',
         exact: true,
         children: <Auth><Notification /></Auth>
+    },
+    {
+        path: '/groups',
+        exact: false,
+        children: <Auth><Group /></Auth>
+    },
+    {
+        path: '/groups/:id',
+        exact: false,
+        children: <Auth><GroupDetail /></Auth>
     }
 ];
