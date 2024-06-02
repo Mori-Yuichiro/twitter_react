@@ -3,9 +3,10 @@ import { AiOutlineRetweet } from "react-icons/ai";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa6";
 import { CiBookmark } from "react-icons/ci";
+import { FaBookmark } from "react-icons/fa6";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { Link } from "react-router-dom";
-import "../../style/atoms/tweet/Tweet.scss"
+import "../../style/atoms/tweet/Tweet.scss";
 import { TweetHook } from "../../hooks/atoms/TweetHook";
 import { CommentModal } from "../modals/CommentModal";
 
@@ -20,7 +21,9 @@ export const Tweet = ({ tweet, user }) => {
         createRetweet,
         deleteRetweet,
         createFavorite,
-        deleteFavorite
+        deleteFavorite,
+        createBookmark,
+        deleteBookmark
     } = TweetHook(tweet);
 
 
@@ -65,7 +68,17 @@ export const Tweet = ({ tweet, user }) => {
                     />}
                     <p>{tweet.nices_count}</p>
                 </div>
-                <CiBookmark />
+                {tweet.bookmarked ? (
+                    <FaBookmark
+                        className="bookmark-icon"
+                        onClick={deleteBookmark}
+                    />
+                ) : (
+                    <CiBookmark
+                        className="bookmark-icon"
+                        onClick={createBookmark}
+                    />
+                )}
             </div>
             <CommentModal
                 showCommentModal={showCommentModal}
