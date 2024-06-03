@@ -1,32 +1,14 @@
 import { IconContext } from "react-icons";
-import { AiFillHome } from "react-icons/ai";
-import { AiOutlineSearch } from "react-icons/ai";
-import { IoMdNotificationsOutline } from "react-icons/io";
-import { AiOutlineMail } from "react-icons/ai";
-import { CiViewList } from "react-icons/ci";
-import { FaTwitter } from "react-icons/fa6";
 import { BsPerson } from "react-icons/bs";
-import { CiCircleMore } from "react-icons/ci";
-import { BsBookmark } from "react-icons/bs";
-import { BsPeople } from "react-icons/bs";
+
 
 import '../../../style/atoms/toppage/Sidebar.scss'
 import { Button } from "../Button";
 import { Link } from "react-router-dom";
+import { SidebarHook } from "../../../hooks/atoms/SidebarHook";
 
 export const Sidebar = ({ currentUserData }) => {
-    const ITEM_LIST = [
-        { label: "Home", icon: <AiFillHome /> },
-        { label: "Explore", icon: <AiOutlineSearch /> },
-        { label: "Notification", icon: <IoMdNotificationsOutline /> },
-        { label: "Message", icon: <AiOutlineMail /> },
-        { label: "Lists", icon: <CiViewList /> },
-        { label: "Bookmarks", icon: <BsBookmark /> },
-        { label: "Communities", icon: <BsPeople /> },
-        { label: "Premium", icon: <FaTwitter /> },
-        { label: "Profile", icon: <BsPerson /> },
-        { label: "More", icon: <CiCircleMore /> },
-    ];
+    const { ITEM_LIST, onClickWithdrawal } = SidebarHook();
 
     return (
         <aside>
@@ -45,6 +27,8 @@ export const Sidebar = ({ currentUserData }) => {
                                 <Link to='/groups'><p>{item.label}</p></Link>
                             ) : (item.label === 'Bookmarks') ? (
                                 <Link to='/bookmarks'><p>{item.label}</p></Link>
+                            ) : (item.label === 'Withdrawal') ? (
+                                <p className="withdrawal" onClick={onClickWithdrawal}>{item.label}</p>
                             ) : (<Link to={`/${item.label}`}><p>{item.label}</p></Link >
                             )}
                         </IconContext.Provider>
