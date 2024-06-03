@@ -54,6 +54,30 @@ export const TweetHook = (tweet) => {
         }
     }, [instance, tweet.id])
 
+    const createBookmark = useCallback(async () => {
+        try {
+            await instance.post(
+                '/api/v1/bookmarks',
+                {
+                    tweet_id: tweet.id
+                }
+            );
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }, [tweet.id])
+
+    const deleteBookmark = useCallback(async () => {
+        try {
+            const bookmark = tweet.bookmarks.find(bookmark => bookmark.user_id === currentUserData.data.id);
+            await instance.delete(`/api/v1/bookmarks/${bookmark.id}`);
+            window.location.reload();
+        } catch (error) {
+            console.log(error);
+        }
+    }, [tweet.bookmarks])
+
     return {
         currentUserData,
         regexProfile,
@@ -64,6 +88,8 @@ export const TweetHook = (tweet) => {
         createRetweet,
         deleteRetweet,
         createFavorite,
-        deleteFavorite
+        deleteFavorite,
+        createBookmark,
+        deleteBookmark
     }
 }

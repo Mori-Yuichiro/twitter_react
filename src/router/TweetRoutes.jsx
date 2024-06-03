@@ -6,6 +6,7 @@ import { Profile } from "../components/pages/profile/Profile";
 import { Notification } from "../components/pages/notification/Notification";
 import { Group } from "../components/pages/group/Group";
 import { GroupDetail } from "../components/pages/group/GroupDetail";
+import { Bookmark } from "../components/pages/bookmark/Bookmark";
 
 export const TweetRoutes = [
     {
@@ -42,5 +43,10 @@ export const TweetRoutes = [
         path: '/groups/:id',
         exact: false,
         children: <Auth><GroupDetail /></Auth>
+    },
+    {
+        path: '/bookmarks',
+        exact: true,
+        children: <Auth><Bookmark /></Auth>
     }
 ];

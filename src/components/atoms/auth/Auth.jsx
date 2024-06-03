@@ -13,7 +13,8 @@ export const Auth = memo(({ children }) => {
         || regexProfile.test(location.pathname)
         || (location.pathname === '/notifications')
         || (location.pathname === '/groups')
-        || regexGroup.test(location.pathname);
+        || regexGroup.test(location.pathname)
+        || (location.pathname === '/bookmarks');
 
     if (!cookies['access-token'] && isOnHome) return <Navigate replace to="/" />;
     if (cookies['access-token'] && isOnHome) return (
