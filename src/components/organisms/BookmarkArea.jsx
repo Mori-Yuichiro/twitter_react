@@ -9,7 +9,7 @@ export const BookmarkArea = memo(() => {
     return (
         <div className="bookmark-area">
             <div className="header">
-                <h4>Messages</h4>
+                <h4>Bookmarks</h4>
             </div>
             <div className="bookmarks">
                 {bookmarkTweets.bookmark_tweet.map((bookmarkTweet, i) => (
